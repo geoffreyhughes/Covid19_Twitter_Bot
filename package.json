@@ -1,0 +1,24 @@
+{
+  "name": "covid19_bot",
+  "version": "1.0.0",
+  "description": "Covid19County Bot for Twitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitter",
+    "bot",
+    "covid",
+    "19",
+    "county"
+  ],
+  "author": "Geoffrey Hughes",
+  "license": "ISC",
+  "dependencies": {
+    "csv-load-sync": "^1.0.0",
+    "dotenv": "^8.2.0",
+    "fast-csv": "^4.3.2",
+    "twit": "^2.2.11"
+  }
+}
