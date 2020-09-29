@@ -45,7 +45,7 @@ function reply_tweet(parent_id, curr_state) {
   console.log('Tweeting in reply to ', parent_id);
   T.post('statuses/update', {in_reply_to_status_id: parent_id, auto_populate_reply_metadata: true,
     status: '(' + '#'.concat( csv_data[curr_state].state.replace(/\s/g, '')) + '): ' + csv_data[curr_state].cases +
-    ' cases and ' + csv_data[curr_state].deaths + ' deaths.' +
+    ' cases and ' + csv_data[curr_state].deaths + ' deaths. #COVID19' +
     ' @Covid19States'}, function(err, data, response) {
 
       // Rows of list (states / territtories)
