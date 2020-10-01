@@ -33,4 +33,4 @@ f=pd.read_csv(filename)
 # Clean csv
 keep_col = ['date','state','cases','deaths']
 new_f = f[keep_col]
-new_f.to_csv(directory + '/data/state_NYT_clean.csv', index=False)
+new_f.to_csv(directory + '/data/' + new_f['date'][0] + '_live_State_NYT_clean.csv', index=False)
