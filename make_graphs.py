@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 
-def make_bar_chart(clean_file):
+def make_bar_graph(clean_file):
 
     # Number of cases and deaths, stacked on each other, bar graph by State
     curr_dir = os.getcwd()

@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 from os import getcwd
 
-from make_graphs import make_bar_chart
+from make_graphs import make_bar_graph
 
 # TODO: County level data
 url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv"
