@@ -25,7 +25,7 @@ date_today = date_today_array[1].concat('/', date_today_array[2], '/', date_toda
 console.log(date_today)
 
 // Head tweet, begins daily thread
-T.post('statuses/update', { status: 'WithIDandTrue[' + date_today +
+T.post('statuses/update', { status: '[' + date_today +
 "]: United States COVID-19 statistics by State. Data is cumulative and provided by @nytimes. Daily thread. #COVID19" }, function(err, data, response) {
   console.log(data);
   console.log('Head tweet id_str: ', data.id_str);
@@ -44,12 +44,12 @@ function reply_tweet(parent_id, curr_state) {
   console.log('Current State index: ', curr_state, ' for ', csv_data[curr_state].state);
   console.log('Tweeting in reply to ', parent_id);
   T.post('statuses/update', {in_reply_to_status_id: parent_id, auto_populate_reply_metadata: true,
-    status: 'TEST5(' + '#'.concat( csv_data[curr_state].state.replace(/\s/g, '')) + '): ' + csv_data[curr_state].cases +
+    status: '(' + '#'.concat( csv_data[curr_state].state.replace(/\s/g, '')) + '): ' + csv_data[curr_state].cases +
     ' cases and ' + csv_data[curr_state].deaths + ' deaths. #COVID19' +
     ' @Covid19States'}, function(err, data, response) {
 
       // Rows of list (states / territtories)
-      if (curr_state < 2) {     // 54 for states and territories
+      if (curr_state < 54) {     // 54 for states and territories
         curr_state += 1;
         console.log('calling fn with id_str (used): ', data.id_str);
         console.log('calling fn with id (not used): ', data.id);

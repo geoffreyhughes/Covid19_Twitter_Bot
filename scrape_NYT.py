@@ -4,11 +4,13 @@ import pandas as pd
 import requests
 from os import getcwd
 
+from make_graphs import make_bar_chart
+
 # TODO: County level data
 url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-counties.csv"
 
-directory = getcwd()
-filename = directory + '/data/county_NYT.csv'
+curr_dir = getcwd()
+filename = curr_dir + '/data/county_NYT.csv'
 r = requests.get(url)
 
 f = open(filename,'w')
@@ -20,8 +22,8 @@ print(filename)
 
 # Scrape State level data
 url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-states.csv"
-directory = getcwd()
-filename = directory + '/data/state_NYT.csv'
+curr_dir = getcwd()
+filename = curr_dir + '/data/state_NYT.csv'
 r = requests.get(url)
 f = open(filename,'w')
 f.write(r.content)
@@ -33,4 +35,8 @@ f=pd.read_csv(filename)
 # Clean csv
 keep_col = ['date','state','cases','deaths']
 new_f = f[keep_col]
-new_f.to_csv(directory + '/data/' + new_f['date'][0] + '_live_State_NYT_clean.csv', index=False)
+clean_file = new_f['date'][0] + '_State_NYT'
+new_f.to_csv(curr_dir + '/data/' + clean_file + '.csv', index=False)
+
+# Make bar chart graph
+make_bar_chart(clean_file)
