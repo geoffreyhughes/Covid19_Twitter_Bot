@@ -18,8 +18,6 @@ f.write(r.content)
 f.close()
 print(filename)
 
-
-
 # Scrape State level data
 url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-states.csv"
 curr_dir = getcwd()
@@ -39,4 +37,4 @@ clean_file = new_f['date'][0] + '_State_NYT'
 new_f.to_csv(curr_dir + '/data/' + clean_file + '.csv', index=False)
 
 # Make bar chart graph
-make_bar_chart(clean_file)
+make_bar_graph(clean_file)
