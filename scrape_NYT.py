@@ -13,7 +13,7 @@ url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/live/us-st
 curr_dir = getcwd()
 filename = curr_dir + '/data/raw/State_raw.csv'
 r = requests.get(url)
-f = open(filename,'w')
+f = open(filename,'wb')
 f.write(r.content)
 f.close()
 
@@ -24,6 +24,8 @@ f=pd.read_csv(filename)
 keep_col = ['date','state','cases','deaths']
 new_f = f[keep_col]
 clean_file = new_f['date'][0] + '_State'
+new_f.to_csv(curr_dir + '/data/clean/' + 'most_recent' + '.csv', index=False)
+print('+CREATED: ' + curr_dir + '/data/clean/' + 'most_recent' + '.csv')
 new_f.to_csv(curr_dir + '/data/clean/' + clean_file + '.csv', index=False)
 print('+CREATED: ' + curr_dir + '/data/clean/' + clean_file + '.csv')
 

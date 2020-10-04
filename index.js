@@ -13,7 +13,7 @@ var T = new Twit({
 
 // Read data into array of objects
 var loader = require('csv-load-sync');
-var csv_data = loader('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/state_NYT_clean.csv');
+var csv_data = loader('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/clean/most_recent.csv');
 
 csv_data.forEach(state => console.log(state.date, ' ', state.state, ' has ', state.cases, ' cases and ', state.deaths, ' dead.',
 '#'.concat( state.state.replace(/\s/g, ''))));

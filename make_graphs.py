@@ -4,6 +4,8 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 
+from pdf2image import convert_from_path
+
 
 
 # Number of cases and deaths, stacked on each other, bar graph by State
@@ -29,12 +31,17 @@ def make_bar_graph(clean_file):
     plt2 = ax.bar(x_axis, y2_axis, color='r', width=w, align='center', bottom=y_axis, label='Deaths')
 
     plt.legend((plt1[0], plt2[0]), ('Cases', 'Deaths'))
-    plt.suptitle('Cumulative COVID-19 Cases and Deaths in the United States', fontsize=16)
+    plt.suptitle('Cumulative COVID-19 Cases and Deaths in the United States', fontsize=14)
     ax.set_xticks(x_axis);
     ax.set_xticklabels(x_labels, rotation=90, fontsize=8)
 
     plt.tight_layout()
     plt.subplots_adjust(top=0.89)
 
-    plt.savefig(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf')
+    plt.savefig(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf', format='pdf', )
     print('+CREATED: ' + curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf')
+
+    images = convert_from_path(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf', 500)
+
+    for image in images:
+        image.save(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.png', 'PNG')
