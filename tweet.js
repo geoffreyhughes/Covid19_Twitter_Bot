@@ -10,11 +10,19 @@ var T = new Twit({
     access_token_secret: process.env.access_token_secret,
 })
 
+// Get MM/DD/YYYY for tweeting purposes
+var dateObj = new Date();
+var month = dateObj.getUTCMonth() + 1; //months from 1-12
+var day = dateObj.getUTCDate();
+var year = dateObj.getUTCFullYear();
+
+curr_date = month + "/" + day + "/" + year;
+
 //
 // post a tweet with media
 //
 const fs = require('fs');
-var b64content = fs.readFileSync('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/graphs/2020-10-04_State_bar_graph.png',
+var b64content = fs.readFileSync('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/graphs/most_recent_bar_graph.png',
  { encoding: 'base64' })
 
 // first we must post the media to Twitter
@@ -28,7 +36,7 @@ T.post('media/upload', { media_data: b64content }, function (err, data, response
   T.post('media/metadata/create', meta_params, function (err, data, response) {
     if (!err) {
       // now we can reference the media and post a tweet (media will attach to the tweet)
-      var params = { status: '[10/04/2020]: Cumulative COVID-19 Cases and Deaths in the United States', media_ids: [mediaIdStr] }
+      var params = { status: '[' + curr_date + ']: Cumulative COVID-19 Cases and Deaths in the United States', media_ids: [mediaIdStr] }
 
       T.post('statuses/update', params, function (err, data, response) {
         console.log(data)
