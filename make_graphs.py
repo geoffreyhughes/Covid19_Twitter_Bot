@@ -48,3 +48,7 @@ def make_bar_graph(clean_file):
         print('+CREATED: ' + curr_dir + '/data/graphs/' + clean_file + '_bar_graph.png')
         image.save(curr_dir + '/data/graphs/' + 'most_recent_bar_graph.png', 'PNG')
         print('+CREATED: ' + curr_dir + '/data/graphs/' + 'most_recent_bar_graph.png')
+
+
+# # Percentage increase in cases
+# def
