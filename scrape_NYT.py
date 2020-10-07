@@ -34,8 +34,10 @@ print('+CREATED: ' + curr_dir + '/data/live/raw/' + new_f['date'][0] + '_State_r
 # Make bar chart graph - TODO: make calls later, call fns as [clean -> graphs]
 make_bar_graph(clean_file)
 
+###--- ABOVE: LIVE
+###--- BELOW: HISTORICAL
 
-# Scrape live daily data
+# Scrape comprehensive daily historical data
 url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv'
 curr_dir = getcwd()
 filename = curr_dir + '/data/historical/raw/State_final_count.csv'
@@ -52,4 +54,15 @@ f=pd.read_csv(filename)
 curr_date = f.iloc[-1]['date']
 print(curr_date)
 
-# TODO: Restructure file system for live vs historical data
+clean_df = f
+#clean_df['d_cases'] = clean_df['cases'] - clean_df['cases'].shift(-1)
+
+state_changes = []
+for i in range(0,12004):
+    if clean_df.iloc[i]['state'] not in state_changes:
+        state_changes.append(clean_df.iloc[i]['state'])
+
+# TODO:
+# list for each state, then add rows from master list where state=list
+# make sure to preserve date, and use commented line above with shift to find
+# d_cases and d_deaths for each entry except the first entry for that state
