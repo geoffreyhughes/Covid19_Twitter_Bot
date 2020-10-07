@@ -13,7 +13,7 @@ def make_bar_graph(clean_file):
 
     # Read in file made in scrape_NYT.py
     curr_dir = os.getcwd()
-    df = pd.read_csv(curr_dir + '/data/clean/' + clean_file + '.csv', sep=',',header=0)
+    df = pd.read_csv(curr_dir + '/data/live/clean/' + clean_file + '.csv', sep=',',header=0)
 
     # Sort the df by descending case values; assign lists for each axis
     df = df.sort_values('cases', ascending=False)
@@ -38,16 +38,16 @@ def make_bar_graph(clean_file):
     plt.tight_layout()
     plt.subplots_adjust(top=0.89)
 
-    plt.savefig(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf', format='pdf', )
-    print('+CREATED: ' + curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf')
+    plt.savefig(curr_dir + '/data/live/graphs/' + clean_file + '_bar_graph.pdf', format='pdf', )
+    print('+CREATED: ' + curr_dir + '/data/live/graphs/' + clean_file + '_bar_graph.pdf')
 
-    images = convert_from_path(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.pdf', 500)
+    images = convert_from_path(curr_dir + '/data/live/graphs/' + clean_file + '_bar_graph.pdf', 500)
 
     for image in images:
-        image.save(curr_dir + '/data/graphs/' + clean_file + '_bar_graph.png', 'PNG')
-        print('+CREATED: ' + curr_dir + '/data/graphs/' + clean_file + '_bar_graph.png')
-        image.save(curr_dir + '/data/graphs/' + 'most_recent_bar_graph.png', 'PNG')
-        print('+CREATED: ' + curr_dir + '/data/graphs/' + 'most_recent_bar_graph.png')
+        image.save(curr_dir + '/data/live/graphs/' + clean_file + '_bar_graph.png', 'PNG')
+        print('+CREATED: ' + curr_dir + '/data/live/graphs/' + clean_file + '_bar_graph.png')
+        image.save(curr_dir + '/data/live/graphs/' + 'most_recent_bar_graph.png', 'PNG')
+        print('+CREATED: ' + curr_dir + '/data/live/graphs/' + 'most_recent_bar_graph.png')
 
 
 # # Percentage increase in cases

@@ -22,7 +22,7 @@ curr_date = month + "/" + day + "/" + year;
 // post a tweet with media
 //
 const fs = require('fs');
-var b64content = fs.readFileSync('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/graphs/most_recent_bar_graph.png',
+var b64content = fs.readFileSync('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/live/graphs/most_recent_bar_graph.png',
  { encoding: 'base64' })
 
 // first we must post the media to Twitter

@@ -13,7 +13,7 @@ var T = new Twit({
 
 // Read data into array of objects
 var loader = require('csv-load-sync');
-var csv_data = loader('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/clean/most_recent.csv');
+var csv_data = loader('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/live/clean/most_recent.csv');
 
 csv_data.forEach(state => console.log(state.date, ' ', state.state, ' has ', state.cases, ' cases and ', state.deaths, ' dead.',
 '#'.concat( state.state.replace(/\s/g, ''))));
@@ -39,7 +39,7 @@ T.post('statuses/update', { status: '[' + date_today +
 function reply_tweet(parent_id, curr_state) {
 
   var loader = require('csv-load-sync');
-  var csv_data = loader('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/state_NYT_clean.csv');
+  var csv_data = loader('/Users/geoffreyhughes/Projects/Covid19_Twitter_Bot/data/live/state_NYT_clean.csv');
 
   console.log('Current State index: ', curr_state, ' for ', csv_data[curr_state].state);
   console.log('Tweeting in reply to ', parent_id);
