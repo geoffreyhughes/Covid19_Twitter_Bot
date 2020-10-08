@@ -55,12 +55,46 @@ curr_date = f.iloc[-1]['date']
 print(curr_date)
 
 clean_df = f
+num_rows = len(clean_df)
 #clean_df['d_cases'] = clean_df['cases'] - clean_df['cases'].shift(-1)
 
-state_changes = []
-for i in range(0,12004):
-    if clean_df.iloc[i]['state'] not in state_changes:
-        state_changes.append(clean_df.iloc[i]['state'])
+states = []
+for i in range(0,num_rows):
+    if clean_df.iloc[i]['state'] not in states:
+        states.append(clean_df.iloc[i]['state'])
+
+# Dictionary storing a list for each State
+state_cases = {}
+state_deaths = {}
+for state in states:
+    state_cases[state] = []
+    state_deaths[state] = []
+
+# Add cases and deaths to cooresponding list
+for i in range(0,num_rows):
+    state_cases[clean_df.iloc[i]['state']].append(clean_df.iloc[i]['cases'])
+    state_deaths[clean_df.iloc[i]['state']].append(clean_df.iloc[i]['deaths'])
+
+
+# Pad a zero for each state's first entry d_cases and d_deaths calculations
+state_cases[state].insert(0,0)
+state_deaths[state].insert(0,0)
+# Note: May have been able to do this entire process a less complicated way?
+# Without dictionaries. Maybe by sorting the df by State first, date second.
+
+print(state_cases['California'])
+print(state_deaths['California'])
+
+# Add column of changes for each row, except for the first entry
+for i in range(num_rows-1,0,-1):
+    clean_df.loc[i, 'd_cases'] = state_cases[clean_df.iloc[i]['state']][-1] - state_cases[clean_df.iloc[i]['state']][-2]
+    state_cases[clean_df.iloc[i]['state']].pop(-1)
+    clean_df.loc[i, 'd_deaths'] = state_deaths[clean_df.iloc[i]['state']][-1] - state_deaths[clean_df.iloc[i]['state']][-2]
+    state_deaths[clean_df.iloc[i]['state']].pop(-1)
+
+clean_df.to_csv(curr_dir + '/data/historical/clean/' + 'covid_master_list' + '.csv', index=False)
+
+
 
 # TODO:
 # list for each state, then add rows from master list where state=list
