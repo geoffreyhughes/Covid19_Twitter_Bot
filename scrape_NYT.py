@@ -77,8 +77,11 @@ for i in range(0,num_rows):
 
 
 # Pad a zero for each state's first entry d_cases and d_deaths calculations
-state_cases[state].insert(0,0)
-state_deaths[state].insert(0,0)
+for state in states:
+    state_cases[state].insert(0,0)
+    state_deaths[state].insert(0,0)
+
+
 # Note: May have been able to do this entire process a less complicated way?
 # Without dictionaries. Maybe by sorting the df by State first, date second.
 
@@ -92,7 +95,17 @@ for i in range(num_rows-1,0,-1):
     clean_df.loc[i, 'd_deaths'] = state_deaths[clean_df.iloc[i]['state']][-1] - state_deaths[clean_df.iloc[i]['state']][-2]
     state_deaths[clean_df.iloc[i]['state']].pop(-1)
 
+
+    # if location is first of its state list: do % change compared to 10+ prev entries
+
 clean_df.to_csv(curr_dir + '/data/historical/clean/' + 'covid_master_list' + '.csv', index=False)
+
+
+
+# ax1 = df_pct_change.plot.scatter(x='date',
+#                       y='width',
+#                       c='DarkBlue')
+
 
 
 
